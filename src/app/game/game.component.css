@@ -1,0 +1,66 @@
+.grid {
+  display: grid;
+  height: 100%;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  grid-template-columns: repeat(var(--grid-cols), 1fr); /* Setează coloanele */
+  grid-template-rows: repeat(var(--grid-rows), 1fr); /* Setează rândurile */
+}
+
+.row {
+  display: contents; /* Fiecare row va fi un container pentru celule */
+}
+
+.cell {
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 1 / 1; /* Păstrează raportul pentru fiecare celulă */
+}
+
+.cell-unrevealed {
+  background-image: url('../../assets/images/Unrevealed.png');
+}
+
+.cell-flagged {
+  background-image: url('../../assets/images/Flagged.png');
+}
+
+.cell-mine {
+  background-image: url('../../assets/images/Mine.png');
+}
+
+.cell-revealed-0 {
+  background-image: url('../../assets/images/Revealed0.png');
+}
+
+.cell-revealed-1 {
+  background-image: url('../../assets/images/Revealed1.png');
+}
+
+.cell-revealed-2 {
+  background-image: url('../../assets/images/Revealed2.png');
+}
+
+.cell-revealed-3 {
+  background-image: url('../../assets/images/Revealed3.png');
+}
+
+.cell-revealed-4 {
+  background-image: url('../../assets/images/Revealed4.png');
+}
+
+.cell-revealed-5 {
+  background-image: url('../../assets/images/Revealed5.png');
+}
+
+.cell-revealed-6 {
+  background-image: url('../../assets/images/Revealed6.png');
+}
+
+.cell-revealed-7 {
+  background-image: url('../../assets/images/Revealed7.png');
+}
+
+.cell-revealed-8 {
+  background-image: url('../../assets/images/Revealed8.png');
+}
