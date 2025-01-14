@@ -1,4 +1,10 @@
-<div class="grid">
+<div class="container">
+  <div class="status-bar">
+    <span>Flags remaining: {{ flagsNumber }}</span>
+    <span>Timer: {{ timer }} s</span>
+  </div>
+
+  <div class="grid">
     <div *ngFor="let row of cells" class="row">
       <div *ngFor="let cell of row" class="cell"
       (click)="checkCell(cell)"
@@ -6,3 +12,4 @@
       [ngClass]="getCellClass(cell)"></div>
     </div>
   </div>
+</div>

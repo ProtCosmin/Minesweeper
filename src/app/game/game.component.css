@@ -1,3 +1,25 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #eef5fb;
+}
+
+.status-bar {
+  background-color: #f9f9f9;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.status-bar span {
+  color: #333;
+}
+
 .grid {
   display: grid;
   height: 100%;

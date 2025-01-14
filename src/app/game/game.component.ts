@@ -20,6 +20,8 @@ export class GameComponent implements OnInit {
     minesNumber: number = 10;
     flagsNumber: number = 10;
     revealedCells: number = 0;
+    timer = 0;
+    private timerInterval: any;
   
     constructor(private route: ActivatedRoute) {}
 
@@ -33,6 +35,7 @@ export class GameComponent implements OnInit {
       this.gameState = GameState.FIRSTCLICK;
       this.flagsNumber = this.minesNumber;
       this.revealedCells = 0;
+      this.timer = 0;
       this.setUnrevealedCells();
     }
   
@@ -140,7 +143,9 @@ export class GameComponent implements OnInit {
     
     generateMines(clickedCellRow: number, clickedCellColumn: number): void {
       this.gameState = GameState.INGAME;
-      
+      this.timerInterval = setInterval(() => {
+        this.timer++;
+      }, 1000);
       let indexMine = 0;
       while (indexMine < this.minesNumber) {
         const xPos = Math.floor(Math.random() * this.height);
@@ -226,6 +231,8 @@ export class GameComponent implements OnInit {
     
     gameOver(): void {
       this.gameState = GameState.GAMEOVER;
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
       for (let row = 0; row < this.height; row++) {
         for (let column = 0; column < this.width; column++) {
           if (this.cells[row][column].state === CellState.MINE) {
@@ -238,6 +245,8 @@ export class GameComponent implements OnInit {
     CheckVictory(): void {
       if (this.width * this.height - this.revealedCells == this.minesNumber){
         this.gameState = GameState.WIN;
+        clearInterval(this.timerInterval);
+        this.timerInterval = null;
         for (let row = 0; row < this.height; row++) {
           for (let column = 0; column < this.width; column++) {
             if (this.cells[row][column].state === CellState.MINE) {
