@@ -1,0 +1,9 @@
+export enum CellState {
+    FLAGGED = 'FLAGGED',
+    REVEALED = 'REVEALED',
+    UNREVEALED = 'UNREVEALED',
+    MINE = 'MINE',
+    FLAGGED_MINE = 'FLAGGED_MINE',
+    REVEALED_MINE = 'REVEALED_MINE'
+  }
+  

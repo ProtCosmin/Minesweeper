@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Minesweeper</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script>
+    function fixDiacritics(str) {
+    return decodeURIComponent(escape(str));
+    }
+    function decodeJWTToken(token) {
+      return JSON.parse(atob(token.split(".")[1]));
+    }
+    function handleCredentialResponse(response) {
+      const responsePayload = decodeJWTToken(response.credential);
+
+      if (responsePayload) {
+        const fixedGivenName = fixDiacritics(responsePayload.given_name);
+        const fixedFamilyName = fixDiacritics(responsePayload.family_name);
+        const fixedName = fixDiacritics(responsePayload.name);
+
+        sessionStorage.setItem("loggedInUser", JSON.stringify({
+          given_name: fixedGivenName,
+          family_name: fixedFamilyName,
+          email: responsePayload.email,
+          name: fixedName,
+          picture: responsePayload.picture
+        }));
+
+        fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token: response.credential }),
+        })
+          .then(response2 => response2.json())
+          .then(data => {
+            if (data.success) {
+              window.location.href = '/profile';
+            } else {
+              console.error("Autentificare eșuată");
+            }
+          })
+          .catch(error => {
+            console.error("Eroare la comunicarea cu serverul: ", error);
+          });
+      } else {
+        console.error("Failed to decode JWT token.");
+      }
+    }
+    function handleSignout() {
+      google.accounts.id.disableAutoSelect();
+    }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
