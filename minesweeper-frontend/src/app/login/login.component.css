@@ -1,0 +1,25 @@
+:host {
+    display: block;
+    height: 100vh;
+    background-image: url('../../assets/images/background.jpg'); /* Calea către imagine */
+    background-size: cover; /* Asigură că imaginea acoperă tot ecranul */
+    background-position: center; /* Poziționează imaginea pe mijloc */
+    background-repeat: no-repeat; /* Evită repetarea imaginii */
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrare verticală pe întreaga pagină */
+    text-align: center;
+  }
+  
+  .login-title {
+    font-size: 3rem; /* Dimensiune mare pentru titlu */
+    font-weight: bold;
+    margin-bottom: 2rem; /* Spațiere între text și buton */
+    color: #333; /* O culoare simplă pentru text */
+  }
+  

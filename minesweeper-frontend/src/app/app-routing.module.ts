@@ -1,6 +1,6 @@
 
 import { RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { GameComponent } from './game/game.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
@@ -11,26 +11,36 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
     {
       path: 'login', 
-      component: LoginComponent
+      component: LoginComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: 'game', 
-      component: GameComponent
+      component: GameComponent,
+      canActivate: [AuthGuard]
     },
     {
         path: 'leaderboard', 
-        component: LeaderboardComponent
+        component: LeaderboardComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'instructions', 
-        component: InstructionsComponent
+        component: InstructionsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'profile', 
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
     },
     {
       path: '',
+      redirectTo: 'login',
+      pathMatch: 'full'
+    },
+    {
+      path: '**',
       redirectTo: 'login',
       pathMatch: 'full'
     }

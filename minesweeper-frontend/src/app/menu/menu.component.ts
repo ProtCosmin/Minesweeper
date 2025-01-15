@@ -16,7 +16,7 @@ export class MenuComponent {
   constructor(private router: Router){}
   handleSignOut(){
     handleSignout();
-    sessionStorage.removeItem("LoggedInUser");
+    sessionStorage.removeItem("loggedInUser");
     this.router.navigate(["/login"]).then(() =>{
       window.location.reload();
     })
