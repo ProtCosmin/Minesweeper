@@ -11,7 +11,7 @@
 </mat-menu>
 
 <mat-menu #leaderboardMenu="matMenu">
-  <button mat-menu-item routerLink="/leaderboard" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Beginner</button>
-  <button mat-menu-item routerLink="/leaderboard" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Intermediate</button>
-  <button mat-menu-item routerLink="/leaderboard" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Expert</button>
+  <button mat-menu-item routerLink="/leaderboard" [queryParams]="{ difficulty: 'Beginner' }" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Beginner</button>
+  <button mat-menu-item routerLink="/leaderboard" [queryParams]="{ difficulty: 'Intermediate' }" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Intermediate</button>
+  <button mat-menu-item routerLink="/leaderboard" [queryParams]="{ difficulty: 'Expert' }" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Expert</button>
 </mat-menu>

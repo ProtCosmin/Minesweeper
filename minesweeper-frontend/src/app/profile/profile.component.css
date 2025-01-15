@@ -1,0 +1,88 @@
+/* Container principal pentru a folosi mai bine spațiul */
+.stats-container {
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    max-width: 800px; /* Crește lățimea totală */
+    margin: 0 auto; /* Centrare pe ecran */
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Spațiu între secțiuni */
+}
+
+/* Stats container: reorganizare și redimensionare */
+.difficulty-stats {
+    margin-bottom: 8px;
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Două coloane pentru un aspect compact */
+    gap: 8px; /* Spațiu între elemente */
+}
+
+.difficulty-stats h3 {
+    grid-column: span 2; /* Titlul ocupă ambele coloane */
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 4px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.difficulty-stats p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    font-family: 'Verdana', sans-serif;
+    display: flex;
+    justify-content: space-between; /* Distribuie textul și valorile */
+}
+
+.difficulty-stats span {
+    font-weight: bold;
+    color: #007BFF;
+    font-size: 0.95rem;
+}
+
+/* Profil user: redimensionare și adaptare */
+.user-card {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+    max-width: 800px; /* Ajustăm lățimea să fie consistentă cu stats-container */
+    margin: 0 auto; /* Centrare */
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.7);
+    gap: 16px;
+}
+
+/* Dimensiuni imagini */
+.profile-photo img {
+    width: 80px;
+    height: 80px;
+}
+
+/* Butoane din partea de sus */
+button, .button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    margin: 5px;
+}
+
+button:hover, .button:hover {
+    background-color: #0056b3;
+}

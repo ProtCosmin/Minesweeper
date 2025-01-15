@@ -1,10 +1,22 @@
 <ng-container *ngIf="userProfile">
     <div class="user-card">
-        <div class="profile-photo">
-            <img [src]="userProfile.picture" alt="Profile Photo" />
-        </div>
-        <div class="user-info">
-            <h2>{{userProfile.given_name}} {{userProfile.family_name}}</h2>
-        </div>
+      <div class="profile-photo">
+        <img [src]="userProfile.picture" alt="Profile Photo" />
+      </div>
+      <div class="user-info">
+        <h2>{{ userProfile.given_name }} {{ userProfile.family_name }}</h2>
+      </div>
     </div>
-</ng-container>
+  
+    <div class="stats-container">
+      <h2>Game Statistics</h2>
+      <div *ngFor="let difficulty of difficulties" class="difficulty-stats">
+        <h3>{{ difficulty | titlecase }} Difficulty</h3>
+        <p>Total games: <span>{{ gamesByDifficulty[difficulty] || 0 }}</span></p>
+        <p>Won games: <span>{{ winsByDifficulty[difficulty] || 0 }}</span></p>
+        <p>Lost games: <span>{{ lostGamesByDifficulty[difficulty] || 0 }}</span></p>
+        <p>Winrate: <span>{{ winRatesByDifficulty[difficulty] || 0 }}%</span></p>
+      </div>
+    </div>
+  </ng-container>
+  

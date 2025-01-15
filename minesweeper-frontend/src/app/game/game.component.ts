@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { GameState } from '../models/gamestate.enum';
 import { CellState } from '../models/cellstate.enum';
 import { Cell } from '../models/cell.model';
+import { UserService } from '../services/user.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game',
@@ -15,15 +17,18 @@ import { Cell } from '../models/cell.model';
 export class GameComponent implements OnInit {
     cells: Cell[][] = [];
     gameState: GameState = GameState.FIRSTCLICK;
-    width: number = 10;
-    height: number = 10;
+    width: number = 9;
+    height: number = 9;
     minesNumber: number = 10;
     flagsNumber: number = 10;
     revealedCells: number = 0;
     timer = 0;
     private timerInterval: any;
+    difficulty='Beginner';
+
+    userId: number=0;
   
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private userService: UserService, private gameService: GameService) {}
 
     setGridStyles() {
       const root = document.documentElement;
@@ -54,18 +59,19 @@ export class GameComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.loadUserId();
       this.route.queryParams.subscribe((params) => {
-        const difficulty = params['difficulty'];
+        this.difficulty = params['difficulty'];
   
-        if (difficulty === 'Beginner') {
+        if (this.difficulty === 'Beginner') {
           this.width = 9;
           this.height = 9;
           this.minesNumber = 10;
-        } else if (difficulty === 'Intermediate') {
+        } else if (this.difficulty === 'Intermediate') {
           this.width = 16;
           this.height = 16;
           this.minesNumber = 40;
-        } else if (difficulty === 'Expert') {
+        } else if (this.difficulty === 'Expert') {
           this.width = 30;
           this.height = 16;
           this.minesNumber = 99;
@@ -74,6 +80,21 @@ export class GameComponent implements OnInit {
         this.setGridStyles();
         this.initializeGame();  
       });
+    }
+
+    loadUserId(): void {
+      const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}');
+      const email = loggedInUser.email;
+      console.log(JSON.parse(sessionStorage.getItem('loggedInUser') || '{}'));
+  
+      if (email) {
+        this.userService.getUserIdByEmail(email).subscribe(response => {
+          this.userId = response.id;
+          console.log('ID-ul utilizatorului este:', this.userId);
+        }, error => {
+          console.error('Eroare la obținerea ID-ului utilizatorului:', error);
+        });
+      }
     }
 
     flagCell(cell: Cell, event: MouseEvent): void {
@@ -231,6 +252,10 @@ export class GameComponent implements OnInit {
     
     gameOver(): void {
       this.gameState = GameState.GAMEOVER;
+      this.gameService.AddGame(this.userId, this.difficulty, this.timer, false).subscribe({
+        next: (response) => console.log('Response from backend:', response),
+        error: (error) => console.error('Error in request:', error)
+      });
       clearInterval(this.timerInterval);
       this.timerInterval = null;
       for (let row = 0; row < this.height; row++) {
@@ -245,6 +270,10 @@ export class GameComponent implements OnInit {
     CheckVictory(): void {
       if (this.width * this.height - this.revealedCells == this.minesNumber){
         this.gameState = GameState.WIN;
+        this.gameService.AddGame(this.userId, this.difficulty, this.timer, true).subscribe({
+          next: (response) => console.log('Response from backend:', response),
+          error: (error) => console.error('Error in request:', error)
+        });
         clearInterval(this.timerInterval);
         this.timerInterval = null;
         for (let row = 0; row < this.height; row++) {

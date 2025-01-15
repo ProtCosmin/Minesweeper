@@ -1,1 +1,24 @@
-<p>leaderboard is not available yet.</p>
+<div class="leaderboard">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="rank">
+        <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </mat-cell>
+      </ng-container>
+    <!-- Numele jucătorului -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Durata -->
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
+    </ng-container>
+
+    <!-- Header și row -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
